@@ -24,6 +24,9 @@ public class GravityGun : MonoBehaviour {
 
     [Tooltip("The max distance the object can be from the attachment point before being dropped")] [SerializeField] [Range(0.0f, 2.0f)]
     private float maxDistanceFromAttachment = 1.0f;
+    
+    [Tooltip("Align object axis.")] [SerializeField]
+    private bool alignObject = true;
 
     private Transform orignalAttachmentPoint;
     private bool hasObject = false;
@@ -104,7 +107,8 @@ public class GravityGun : MonoBehaviour {
         if (hasObject) { // if a object is being held, lerp it to the attachment point then apply a hover effect.
             if (objectReachedAttachmentPoint) {
                 VerticalHoverEffect(grabbedObject, objectRandomTimeOffset, objectHoverMagnitude, objectHoverSpeed);
-                DropObjectDistanceCheck();
+                // DropObjectDistanceCheck();
+                DropObjectRaycast();
             } else {
                 LerpObject();
             }
@@ -166,7 +170,8 @@ public class GravityGun : MonoBehaviour {
     void LerpObject() {
         if (grabbedObject == null) return;
         grabbedObject.transform.position = Vector3.MoveTowards(grabbedObject.transform.position, attachmentPoint.position, speedGrab * Time.deltaTime);
-        grabbedObject.transform.rotation = Quaternion.RotateTowards(grabbedObject.transform.rotation, attachmentPoint.rotation, speedGrabRotate * Time.deltaTime);
+        if (alignObject)
+            grabbedObject.transform.rotation = Quaternion.RotateTowards(grabbedObject.transform.rotation, attachmentPoint.rotation, speedGrabRotate * Time.deltaTime);
 
         if ((grabbedObject.transform.position - attachmentPoint.position).magnitude <= 0.01f && Quaternion.Angle(grabbedObject.transform.rotation, attachmentPoint.rotation) <= 0.01f) {
             objectReachedAttachmentPoint = true;
@@ -203,15 +208,14 @@ public class GravityGun : MonoBehaviour {
     }
 
     // Drops the object if it is too far away from the attachment point.
-    // TODO (Arfel): maybe change so that we drop the object if a raycast dont hit the object.
     void DropObjectDistanceCheck() {
         if (grabbedObject == null) return;
-        DropObjectRaycast();
-        // if ((grabbedObject.transform.position - attachmentPoint.position).magnitude > maxDistanceFromAttachment) {
-        //     ReleaseObject();
-        // }
+        if ((grabbedObject.transform.position - attachmentPoint.position).magnitude > maxDistanceFromAttachment) {
+            ReleaseObject();
+        }
     }
 
+    // Drops the object if a raycast stops colliding with the object.
     void DropObjectRaycast() {
         if (grabbedObject == null) return;
 
@@ -265,7 +269,8 @@ public class GravityGun : MonoBehaviour {
 
     // Moves a object up and down in a sinodal way.
     void VerticalHoverEffect(GameObject objectToHover, float timeOffset, float magnitude, float speed) {
-        grabbedObject.transform.position += new Vector3(0f, Mathf.Sin(Time.time * speed + timeOffset) * magnitude, 0f);
+        Vector3 aa = new Vector3(0f, Mathf.Sin(Time.time * speed + timeOffset) * magnitude, 0f);
+        objectToHover.transform.position += aa;
     }
 
     // Moves a object left and right in a sinodal way.
