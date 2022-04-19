@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 22
-  productGUID: b05ddff50e3aa3442b4b0772c5f7dee7
+  productGUID: 844d82ad0b9c01349b5ad11a0a0e8459
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: iCoding-Dreams
+  companyName: fernando
+  productName: iCoding
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -609,8 +609,8 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Template_3D
-  metroPackageVersion: 
+  metroPackageName: Template3D
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -618,7 +618,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: Template_3D
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: My project
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
