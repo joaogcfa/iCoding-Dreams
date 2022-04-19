@@ -73,6 +73,11 @@ public class GravityGun : MonoBehaviour {
     [Tooltip("The sound that will played when a object is being held.")] [SerializeField]
     private AudioSource audioHolding;
 
+    Vector3 mousescroll;
+    float x;
+    float y;
+    float z;
+
 
     void Start() {
         orignalAttachmentPoint = attachmentPoint;
@@ -99,6 +104,11 @@ public class GravityGun : MonoBehaviour {
             } else if (objectInInventory != null && !hasObject) { // only remove a object if there is a object in the inventory and has no object being held.
                 objectRandomTimeOffset = miniatureRandomTimeOffset; // keeps the same time offset for the object when releasing the it from the inventory.
                 ReleaseObjectFromInventory();
+            }
+        }
+        if (Input.mouseScrollDelta.y != 0){
+            if(hasObject){
+                ResizeObject();
             }
         }
     }
@@ -224,6 +234,38 @@ public class GravityGun : MonoBehaviour {
             if (hit.collider.gameObject != grabbedObject) {
                 ReleaseObject();
             }
+        }
+    }
+
+    void ResizeObject(){
+        mousescroll = Input.mouseScrollDelta;
+        x += mousescroll.y;
+        y += mousescroll.y;
+        z += mousescroll.y;
+        transform.localScale = new Vector3(x,y,z);
+        if (x>4)
+        {
+            x = 4;
+        }
+        if (x < 0.1f)
+        {
+            x = 0.1f;
+        }
+        if (y>4)
+        {
+            y = 4;
+        }
+        if (y<0.1f)
+        {
+            y = 0.1f;
+        }
+        if (z>4)
+        {
+            z = 4;
+        }
+        if (z<0.1f)
+        {
+            z = 0.1f;
         }
     }
 
