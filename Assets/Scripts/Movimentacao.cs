@@ -14,6 +14,7 @@ public class Movimentacao : MonoBehaviour
     public Camera playerCamera;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
+    public float deceleration = 0.0f;
 
 
     CharacterController characterController;
@@ -29,6 +30,8 @@ public class Movimentacao : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        walkingSpeed = 7.5f;
+
     }
 
     void Crouch()
@@ -47,8 +50,8 @@ public class Movimentacao : MonoBehaviour
             characterController.height = 2.0f;
             if (characterController.isGrounded)
             {
-                walkingSpeed = 7.5f;
-                runningSpeed = 11.5f;
+                walkingSpeed = walkingSpeed;
+                runningSpeed = runningSpeed;
             }  
         }
     }
@@ -59,11 +62,12 @@ public class Movimentacao : MonoBehaviour
     {
         Crouch();
 
+        deceleration += 0.0000000001f;
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
+        float curSpeedX = canMove ? (isRunning ? (runningSpeed-deceleration) : (walkingSpeed-deceleration)) * Input.GetAxis("Vertical") : 0;
+        float curSpeedY = canMove ? (isRunning ? (runningSpeed-deceleration) : (walkingSpeed-deceleration)) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
