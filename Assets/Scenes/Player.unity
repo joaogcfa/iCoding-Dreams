@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.48319846, g: 0.5256326, b: 0.5460422, a: 1}
+  m_IndirectSpecularColor: {r: 0.483198, g: 0.5256319, b: 0.54604137, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1856,6 +1856,7 @@ MonoBehaviour:
   playerCamera: {fileID: 963194227}
   lookSpeed: 2
   lookXLimit: 45
+  deceleration: 0
   canMove: 1
 --- !u!136 &1025572150
 CapsuleCollider:
@@ -2714,7 +2715,7 @@ MonoBehaviour:
   onPressed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 11500000, guid: 32e341944d793b049a0e0371ae0ddb7b, type: 3}
         m_TargetAssemblyTypeName: LoadNextLevel, Assembly-CSharp
         m_MethodName: 
         m_Mode: 1
@@ -2814,7 +2815,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1299036680}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6992d052876cd4602839454299a58e70, type: 3}
   m_Name: 

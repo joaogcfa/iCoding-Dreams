@@ -19,8 +19,8 @@ public class AudioControle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        int i = 0.01
-        velocidade(i++);
+        float i = 0.01f;
+        velocidade = i++;
         if (velocidade == 1000)
         {
             velocidade = 0;
