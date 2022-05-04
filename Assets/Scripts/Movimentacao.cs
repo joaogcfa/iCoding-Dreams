@@ -24,9 +24,23 @@ public class Movimentacao : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
+    void Desacelera()
+    {
+        if (deceleration < 0.3f)
+        {
+            deceleration += 0.01f;
+        }
+        else
+        {
+            deceleration = 5.0f;
+        }
+    }
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+
+        InvokeRepeating("Desacelera", 1.0f, 0.1f);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -62,7 +76,6 @@ public class Movimentacao : MonoBehaviour
     {
         Crouch();
 
-        deceleration += 0.0000000001f;
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
@@ -70,6 +83,11 @@ public class Movimentacao : MonoBehaviour
         float curSpeedY = canMove ? (isRunning ? (runningSpeed-deceleration) : (walkingSpeed-deceleration)) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+
+        if (walkingSpeed <= 0f)
+        {
+            walkingSpeed = 0f;
+        }
 
         if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
         {
