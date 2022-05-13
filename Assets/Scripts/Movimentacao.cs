@@ -40,7 +40,7 @@ public class Movimentacao : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
 
-        InvokeRepeating("Desacelera", 1.0f, 0.1f);
+        // InvokeRepeating("Desacelera", 1.0f, 0.1f);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

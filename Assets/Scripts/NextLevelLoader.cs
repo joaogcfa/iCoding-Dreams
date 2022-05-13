@@ -17,12 +17,17 @@ public class NextLevelLoader : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision collision)
+    // void OnCollisionEnter(Collision collision)
+    // {
+    //     print(collision.gameObject.name);
+    //     // if (collision.gameObject.name == "Player")
+    //     // {
+    //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    //     // }
+    // }
+
+    void OnTriggerEnter(Collider col)
     {
-        // print(collision.gameObject.name);
-        // if (collision.gameObject.name == "Player")
-        // {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        // }
     }
 }

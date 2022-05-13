@@ -21,7 +21,7 @@ public class DisableMap : MonoBehaviour
 
     public void Load()
     {
-        GameObject.Find("Mapa").SetActive(false);
+        GameObject.Find("Terrain").SetActive(false);
         isPressed = false;
 
     }
