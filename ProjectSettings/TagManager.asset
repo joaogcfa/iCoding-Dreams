@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Areia
   - Chao
+  - Fruit
   layers:
   - Default
   - TransparentFX
