@@ -7,7 +7,9 @@ using UnityEngine;
 public class Movimentacao : MonoBehaviour
 {
     public float walkingSpeed = 7.5f;
+    public float defaultWalkingSpeed = 7.5f;
     public float runningSpeed = 11.5f;
+    public float defaultRunningSpeed = 11.5f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
     public float crouchSpeed = 3f;
@@ -26,7 +28,7 @@ public class Movimentacao : MonoBehaviour
 
     void Desacelera()
     {
-        if (deceleration < 0.3f)
+        if (deceleration < 5.0f)
         {
             deceleration += 0.01f;
         }
@@ -40,7 +42,7 @@ public class Movimentacao : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
 
-        // InvokeRepeating("Desacelera", 1.0f, 0.1f);
+        // InvokeRepeating("Desacelera", 1.0f, 0.1f); Feito perfeitamente pela Ilana, a qual aprendeu com o Jão :)
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -64,9 +66,9 @@ public class Movimentacao : MonoBehaviour
             characterController.height = 2.0f;
             if (characterController.isGrounded)
             {
-                walkingSpeed = walkingSpeed;
-                runningSpeed = runningSpeed;
-            }  
+                walkingSpeed = defaultWalkingSpeed;
+                runningSpeed = defaultRunningSpeed;
+            }
         }
     }
 
@@ -79,8 +81,8 @@ public class Movimentacao : MonoBehaviour
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = canMove ? (isRunning ? (runningSpeed-deceleration) : (walkingSpeed-deceleration)) * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ? (isRunning ? (runningSpeed-deceleration) : (walkingSpeed-deceleration)) * Input.GetAxis("Horizontal") : 0;
+        float curSpeedX = canMove ? (isRunning ? (runningSpeed - deceleration) : (walkingSpeed - deceleration)) * Input.GetAxis("Vertical") : 0;
+        float curSpeedY = canMove ? (isRunning ? (runningSpeed - deceleration) : (walkingSpeed - deceleration)) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
