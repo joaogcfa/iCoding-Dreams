@@ -242,26 +242,27 @@ public class GravityGun : MonoBehaviour {
         x += mousescroll.y;
         y += mousescroll.y;
         z += mousescroll.y;
-        transform.localScale = new Vector3(x,y,z);
-        if (x>4)
+        grabbedObject.transform.localScale = new Vector3(x,y,z);
+        // grabbedObject.transform.position += new Vector3(x,0,z);
+        if (x>3)
         {
-            x = 4;
+            x = 3;
         }
         if (x < 0.1f)
         {
             x = 0.1f;
         }
-        if (y>4)
+        if (y>3)
         {
-            y = 4;
+            y = 3;
         }
         if (y<0.1f)
         {
             y = 0.1f;
         }
-        if (z>4)
+        if (z>3)
         {
-            z = 4;
+            z = 3;
         }
         if (z<0.1f)
         {
